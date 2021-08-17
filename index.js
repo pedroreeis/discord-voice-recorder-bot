@@ -33,4 +33,4 @@ client.on("message", async (message) => {
     commandFile.run(client, message, args);
 });
 
-client.login("Njc0NzM4Mzg1NjI5NDc4OTM5.Xjs9Fw.GvPQcfTUL5FHeDrzPVwNeUsp1aI");
+client.login("");
