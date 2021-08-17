@@ -1,0 +1,28 @@
+{
+  "name": "discord-voice-recorder-bot",
+  "version": "1.0.0",
+  "description": "A Simple discord voice recorder. Development from trial test in ZcComunitty.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/queendeveloperbr/discord-voice-recorder-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/queendeveloperbr/discord-voice-recorder-bot/issues"
+  },
+  "homepage": "https://github.com/queendeveloperbr/discord-voice-recorder-bot#readme",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "dotenv": "^10.0.0",
+    "ffmpeg": "0.0.4",
+    "node-opus": "^0.3.3",
+    "opusscript": "0.0.8",
+    "util": "^0.12.4"
+  }
+}
