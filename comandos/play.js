@@ -5,19 +5,21 @@ module.exports.run = async (client, message, args) => {
     const voicechannel = message.member.voice.channel;
     if(!voicechannel)  return message.channel.send("Por favor, entre em um canal de voz primeiro!");
 
+    if(!fs.existsSync(`./output/recorded.pcm`)) return message.channel.send('Não gravou ainda...')
+
     const connection = await voicechannel.join();
-    const receiver = connection.receiver.createStream(message.member, {
-        mode: "pcm",
-        end: "silence"
+    const stream = fs.createReadStream(`./output/recorded.pcm`);
+
+    const dispatcher = connection.play(stream, {
+        type: "converted"
     });
 
-    const writer = receiver.pipe(fs.createWriteStream(`./output/recorded.pcm`));
-    writer.on("finish", () => {
+    dispatcher.on("finish", () => {
         voicechannel.leave();
-        message.channel.send("Gravado com sucesso.");
-    });
+        return message.channel.send("Reproduzido...")
+    })
 }
 
 module.exports.help = {
-    name: "gravar"
+    name: "play"
  }

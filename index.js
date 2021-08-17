@@ -2,9 +2,6 @@
 const { Client, Collection } = require('discord.js');
 const client = new Client();
 
-const dotenv = require('dotenv');
-dotenv.config();
-
 client.commands = new Collection();
 
 const fs = require("fs");
@@ -36,4 +33,4 @@ client.on("message", async (message) => {
     commandFile.run(client, message, args);
 });
 
-client.login("");
+client.login("Njc0NzM4Mzg1NjI5NDc4OTM5.Xjs9Fw.GvPQcfTUL5FHeDrzPVwNeUsp1aI");
