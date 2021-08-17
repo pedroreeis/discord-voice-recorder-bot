@@ -20,7 +20,7 @@ module.exports.run = async (client, message, args) => {
         if(fs.existsSync(`./output/recorded.pcm`)) {
             const encoder = new Lame({
                 output: "./output/convertido.mp3",
-                bitrate: 192,
+                bitrate: 320,
             }).setFile("./output/recorded.pcm");
             
             encoder
