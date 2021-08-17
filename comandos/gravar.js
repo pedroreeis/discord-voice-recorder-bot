@@ -1,5 +1,5 @@
 const fs = require("fs");
-
+const Lame = require("node-lame").Lame;
 module.exports.run = async (client, message, args) => {
 
     const voicechannel = message.member.voice.channel;
@@ -8,13 +8,35 @@ module.exports.run = async (client, message, args) => {
     const connection = await voicechannel.join();
     const receiver = connection.receiver.createStream(message.member, {
         mode: "pcm",
-        end: "silence"
+        end: "manual"
     });
 
     const writer = receiver.pipe(fs.createWriteStream(`./output/recorded.pcm`));
-    writer.on("finish", () => {
+    client.writer = writer;
+    
+    writer.on("finish", async () => {
         voicechannel.leave();
-        message.channel.send("Gravado com sucesso.");
+
+        if(fs.existsSync(`./output/recorded.pcm`)) {
+            const encoder = new Lame({
+                output: "./output/convertido.mp3",
+                bitrate: 192,
+            }).setFile("./output/recorded.pcm");
+            
+            encoder
+                .encode()
+                .then(() => {
+                    message.channel.send("Sua gravação foi convertida e será enviada em instantes!");
+                    message.channel.send("Aqui está sua gravação:", {
+                        files: [
+                            "./output/convertido.mp3"
+                        ]
+                    })
+                })
+                .catch((error) => {
+                    console.log("ERROR: " + error)
+                });
+        }
     });
 }
 
